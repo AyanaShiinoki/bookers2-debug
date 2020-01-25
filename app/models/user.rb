@@ -16,20 +16,6 @@ has_many :follower_relationships, foreign_key: "following_id", class_name: "Rela
 has_many :followers, through: :follower_relationships
 
 # フォロー機能メソッド
-  # def follow(other_user)
-  #   unless self == other_user
-  #     self.relationships.find_or_create_by(follow_id: other_user.id)
-  #   end
-  # end
-
-  # def unfollow(other_user)
-  #   relationship = self.relationships.find_by(follow_id: other_user.id)
-  #   relationship.destroy if relationship
-  # end
-
-  # def following?(other_user)
-  #   self.followings.include?(other_user)
-  # end
 
   def following?(other_user)
     following_relationships.find_by(following_id: other_user.id)

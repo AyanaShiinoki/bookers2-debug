@@ -4,6 +4,7 @@ devise_for :users
   get 'home/about'
   resources :users,only: [:show,:index,:edit,:update]
   resources :books do
+  	resource :post_comments, only: [:create,:destroy]
   	resource :favorites, only: [:create, :destroy]
   end
 

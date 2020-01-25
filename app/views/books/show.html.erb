@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container book-show">
 <div class="row">
 	<div class="col-xs-3">
 
@@ -6,7 +6,7 @@
 		<%= render 'users/profile',user: @user %>
 
 		<h2>New book</h2>
-		<%= render 'books/newform',book: @book %>
+		<%= render 'books/newform',book: @book_new %>
 
 	</div>
 
@@ -16,33 +16,74 @@
 		<table class="table">
 				<tr>
 					<td>
-						<%= link_to (@book_1.user) do %>
-						<%= attachment_image_tag(@book_1.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-						<%= @book_1.user.name %>
+						<%= link_to (@book.user) do %>
+						<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
+						<%= @book.user.name %>
 						<% end %>
 					</td>
-					<td><%= link_to @book_1.title, @book_1 %></td>
-					<td><%= @book_1.body %></td>
-						<% if @book_1.user.id == current_user.id %>
-					<td><%= link_to "Edit",edit_book_path(@book_1), class: "btn-sm btn-success edit_book_#{@book_1.id}" %></td>
-					<td><%= link_to "Destroy",@book_1, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book_1.id}" %></td>
-						<% end %>
+					<td><%= link_to @book.title, @book %></td>
 					<td>
-						<% if @book_1.favorited_by?(current_user) %>
-								<%= link_to book_favorites_path(@book_1), method: :delete do %>
+						<%= @book.body %>
+					</td>
+					<td>
+						<% if @book.favorited_by?(current_user) %>
+								<%= link_to book_favorites_path(@book), method: :delete do %>
 							      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-							    <%= @book_1.favorites.count %> いいね
+							    <%= @book.favorites.count %> いいね
 								<% end %>
 							<% else %>
-								<%= link_to book_favorites_path(@book_1), method: :post do %>
+								<%= link_to book_favorites_path(@book), method: :post do %>
       							<i class="fa fa-heart-o" aria-hidden="true"></i>
-      							<%= @book_1.favorites.count %> いいね
+      							<%= @book.favorites.count %> いいね
     							<% end %>
     						<% end %>
 					</td>
 
+					<td>
+						<i class="fa fa-comment"></i>
+						<%= @book.post_comments.count %>
+					</td>
+
+					<% if @book.user.id == current_user.id %>
+					<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+					<td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+					<% end %>
+
 				</tr>
 			</table>
+
+			<!-- コメント本文表示 -->
+
+		<ul class="list-inline">
+			<% @book.post_comments.each do |post_comment| %>
+				<li class="list-inline-item">
+
+					<%= attachment_image_tag post_comment.user,  :profile_image, :fill, 50,50, format:'jpeg' %>
+
+
+				</li>
+				<li class="list-inline-item">
+					<div class="comment-text">
+						<%= post_comment.comment %>
+					</div>
+						by<%= link_to "#{@user.name}",user_path(post_comment.user_id) %>
+				</li>
+				<li class="list-inline-item">
+					<% if post_comment.user_id == current_user.id %>
+						<%= link_to "Destroy", book_post_comments_path(@book.id), method: :delete, class: "btn btn-danger btn-sm"%>
+					<% end %>
+				</li>
+				<br>
+			<% end %>
+		</ul>
+
+				<!-- コメント本文表示 -->
+				<!-- コメント入力フォーム -->
+				<%= form_for [@book, @post_comment] do |f| %>
+					<%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+					<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+				<% end %>
+				<!-- コメント入力フォーム -->
 
 	</div>
 </div>

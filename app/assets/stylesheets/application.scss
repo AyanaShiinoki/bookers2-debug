@@ -38,3 +38,15 @@ body {
 .actions {
 	margin-top:10px;
 }
+
+.book-show{
+	.list-inline{
+		.list-inline-item{
+			margin-bottom: 10px;
+		}
+	}
+	.comment-text{
+		display: inline;
+		margin-right: 50px;
+	}
+}

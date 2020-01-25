@@ -3,9 +3,11 @@ class BooksController < ApplicationController
     before_action :authenticate_user!
     
   def show
-  	@book = Book.new
-    @book_1 = Book.find(params[:id])
-    @user = User.find(@book_1.user.id)
+  	@book_new = Book.new
+    @book = Book.find(params[:id])
+    @user = User.find(@book.user.id)
+    @post_comment = PostComment.new
+
   end
 
   def index

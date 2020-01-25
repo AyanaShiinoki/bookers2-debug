@@ -4,6 +4,10 @@
 			<h2>User info</h2>
 			<%= render 'users/profile', user: @user %>
 			<!--同コントローラーのviewで表示ならusersは省略可 -->
+<!-- フォローボタン -->
+　　　<%= render 'follow_form' %>
+　　　<%= render 'stats' %>
+<!-- フォローボタン -->
 
 			<h2>New book</h2>
 			<%= render 'books/newform', book: @book %>

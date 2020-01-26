@@ -34,7 +34,7 @@ has_many :followers, through: :follower_relationships
 
     def self.search(method,word)
         if method == "forward_match"
-            @users = User.where("name LIKE?","#{word}%") #nameカラムから検索
+            @users = User.where("name LIKE?","#{word}%")
         elsif method == "backward_match"
             @users = User.where("name LIKE?","%#{word}")
         elsif method == "perfect_match"

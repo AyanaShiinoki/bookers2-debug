@@ -2,11 +2,11 @@ class SearchController < ApplicationController
 
 def search
 	method = params[:search_method]
-	@word = params[:search_word]
+	word = params[:search_word]
 	if params[:search_content] == "User"
-		@users = User.search(method,@word)
+		@users = User.search(method,word)
 	elsif params[:search_content] == "Book"
-		@books = Book.search(method,@word)
+		@books = Book.search(method,word)
 	else
 	end
 	# 必要？？

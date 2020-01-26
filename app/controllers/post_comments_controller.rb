@@ -1,5 +1,6 @@
 class PostCommentsController < ApplicationController
 
+before_action :authenticate_user!
 
 	def create
 		book = Book.find(params[:book_id])
@@ -11,13 +12,14 @@ class PostCommentsController < ApplicationController
 	end
 
 	def destroy
-		book = Book.find(params[:book_id])
-		comment = PostComment.find_by(params[:id])
-		comment.user_id = current_user.id
-		# 上の二行を短く書くと、
-		# comment = current_user.post_comments.find_by(book_id: book.id)
+		book = Book.find(params[:book_id]) #外部体から[:book_id]
+		comment = PostComment.find_by(params[:id]) #コントローラ内なら(params[:id])
+		if comment.user == current_user
 		comment.destroy
-		redirect_to book_path(book.id)
+		redirect_to request.referer
+		else
+		redirect_to request.referer
+		end
 	end
 
 

@@ -1,10 +1,8 @@
 <div class="container">
-		<div class="row">
-			<div class="col-xs-3">
-
+	<div class="row">
+		<div class="col-xs-3">
 				<h2>User info</h2>
-				<%= render 'users/profile', user: @user %>
-				<!--メモ　右側の指定に注意。そこを間違えるとエラーが発生して表示されない -->
+				<%= render 'users/profile', user: current_user %>
 
 				<h2>New book</h2>
 				<div id="error_explanation">
@@ -18,16 +16,17 @@
 			        <% end %>
 		    	</div>
 				<%= render 'books/newform', book: @book %>
-
-			</div>
-
-			<div class="col-xs-9">
-				<h2>Books index</h2>
-				<!--books一覧 -->
-				<%= render 'books/books_index', books: @books %>
-				<!--books一覧 -->
-
-
-			</div>
 		</div>
+
+
+		<div class="col-xs-9">
+				<h2><%= @word %>の検索結果</h2>
+				<% if @users.present? %>
+					<%= render 'users/users_index', users: @users %>
+				<% elsif @books.present? %>
+					<%= render 'books/books_index', books: @books %>
+				<% end %>
+		</div>
+
+	</div>
 </div>

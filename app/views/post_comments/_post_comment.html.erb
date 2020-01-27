@@ -1,0 +1,23 @@
+<!-- コメント部分テンプレ -->
+		<ul class="list-inline">
+			<% book.post_comments.each do |post_comment| %>
+				<li class="list-inline-item">
+
+					<%= attachment_image_tag post_comment.user,  :profile_image, :fill, 50,50, format:'jpeg' %>
+
+
+				</li>
+				<li class="list-inline-item">
+					<div class="comment-text">
+						<%= post_comment.comment %>
+					</div>
+						by<%= link_to "#{post_comment.user.name}",user_path(post_comment.user_id) %>
+				</li>
+				<li class="list-inline-item">
+					<% if post_comment.user_id == current_user.id %>
+						<%= link_to "Destroy", book_post_comments_path(book.id), method: :delete, class: "btn btn-danger btn-sm"%>
+					<% end %>
+				</li>
+				<br>
+			<% end %>
+		</ul>

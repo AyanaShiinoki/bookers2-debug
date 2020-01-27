@@ -1,0 +1,18 @@
+// $('#comment_field').val('');
+// $('comment_<%= @book.id %>').html('<%= j(render partial: 'post_comments/post_comment',collection: @book.post_comments,locals: {book: @book}) %>');
+
+
+// $('#comments').html("<%= escape_javascript(render 'post_comments/post_comment', book: @book) %>");
+// $('#comment_form').html("<%= escape_javascript(render 'post_comments/post_comment_form',  book: @book,post_comment: @post_comment) %>");
+// $('#comment_field').val('');
+// ('#comments').html("j(render 'post_comments/post_comment', book: @book) %>");
+
+$('#comment_field').val('');
+$('#comments').html("<%= escape_javascript(render 'post_comments/post_comment', book: @book) %>");
+
+// いらない！
+// $('#comment_form').html("<%= escape_javascript(render 'post_comments/post_comment_form',  book: @book,post_comment: @post_comment) %>");
+
+
+
+// $('#post_comment_comment').val("");

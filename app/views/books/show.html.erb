@@ -26,7 +26,9 @@
 						<%= @book.body %>
 					</td>
 					<td>
+						<div id ="fav_btn_<%= @book.id %>">
 						<%= render 'favorites/favorite',book: @book %>
+						</div>
 					</td>
 
 					<td>
@@ -43,46 +45,23 @@
 			</table>
 
 			<!-- コメント本文表示 -->
-
-		<ul class="list-inline">
-			<% @book.post_comments.each do |post_comment| %>
-				<li class="list-inline-item">
-
-					<%= attachment_image_tag post_comment.user,  :profile_image, :fill, 50,50, format:'jpeg' %>
-
-
-				</li>
-				<li class="list-inline-item">
-					<div class="comment-text">
-						<%= post_comment.comment %>
-					</div>
-						by<%= link_to "#{@user.name}",user_path(post_comment.user_id) %>
-				</li>
-				<li class="list-inline-item">
-					<% if post_comment.user_id == current_user.id %>
-						<%= link_to "Destroy", book_post_comments_path(@book.id), method: :delete, class: "btn btn-danger btn-sm"%>
-					<% end %>
-				</li>
-				<br>
-			<% end %>
-		</ul>
-
-				<!-- コメント本文表示 -->
-				<!-- コメント入力フォーム -->
-        <% if @post_comment.errors.any? %>
-            <h2><%= @post_comment.errors.count %> errors prohibited this obj from being saved:</h2>
-                <ul>
-                    <% @post_comment.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                    <% end %>
-                </ul>
-        <% end %>
-
-				<%= form_for [@book, @post_comment] do |f| %>
-					<%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-					<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-				<% end %>
-				<!-- コメント入力フォーム -->
+			<div id ="comments">
+				<%= render 'post_comments/post_comment',book: @book %>
+			</div>
+			<!-- コメント本文表示 -->
+			        <% if @post_comment.errors.any? %>
+			            <h2><%= @post_comment.errors.count %> errors prohibited this obj from being saved:</h2>
+			                <ul>
+			                    <% @post_comment.errors.full_messages.each do |message| %>
+			                        <li><%= message %></li>
+			                    <% end %>
+			                </ul>
+			        <% end %>
+        	<!-- コメント入力フォーム -->
+        	<div id ="comment_form">
+        		<%= render 'post_comments/post_comment_form',book: @book ,post_comment: @post_comment %>
+			</div>
+			<!-- コメント入力フォーム -->
 
 	</div>
 </div>

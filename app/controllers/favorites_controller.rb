@@ -5,6 +5,11 @@ class FavoritesController < ApplicationController
 		favorite = @book.favorites.new(user_id: current_user.id)
 		# favorite = current_user.favorites.new(book_id: @book.id)
 		favorite.save
+
+		# お気に入り通知
+		@book.create_notification_fav!(current_user)
+
+
 		# redirect_back(fallback_location: root_path)
 	end
 

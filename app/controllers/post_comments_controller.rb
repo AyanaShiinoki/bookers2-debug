@@ -8,9 +8,8 @@ before_action :authenticate_user!
 		@post_comment.user_id = current_user.id
 		@post_comment.book_id = @book.id
 		@post_comment.save
-		@book.create_notification_comment!(current_user,@post_comment.id)
 		# コメント通知
-		
+		@book.save_notification_comment!(current_user,@post_comment.id)
 
 		# redirect_to book_path(book)
 	end

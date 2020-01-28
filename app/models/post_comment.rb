@@ -2,4 +2,6 @@ class PostComment < ApplicationRecord
 	belongs_to :user
 	belongs_to :book
 	validates :comment, presence: true
+	# 通知機能
+	has_many :notifications, dependent: :destroy
 end

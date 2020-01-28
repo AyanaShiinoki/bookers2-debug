@@ -15,5 +15,8 @@ devise_for :users
 
   resources :relationships,       only: [:create, :destroy]
 
+  # 通知用
+  resources :notifications, only: :index
+
 
 end

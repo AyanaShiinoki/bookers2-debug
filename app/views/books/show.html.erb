@@ -21,9 +21,7 @@
 
 			<!-- コメント本文表示 -->
 			<table class="show-tb comment_<%= @book.id %>">
-			<!-- <div id ="comments"> -->
 				<%= render 'post_comments/post_comment',book: @book %>
-		<!-- 	</div> -->
 			</table>
 			<!-- コメント本文表示 -->
 			        <% if @post_comment.errors.any? %>

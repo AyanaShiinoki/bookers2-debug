@@ -20,7 +20,7 @@
 
 
 		<div class="col-xs-9">
-				<h2><%= @word %>の検索結果</h2>
+				<h2>検索結果</h2>
 				<% if @users.present? %>
 					<%= render 'users/users_index', users: @users %>
 				<% elsif @books.present? %>

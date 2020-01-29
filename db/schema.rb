@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_25_085458) do
+ActiveRecord::Schema.define(version: 2020_01_29_030037) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -20,11 +20,36 @@ ActiveRecord::Schema.define(version: 2020_01_25_085458) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_chats_on_room_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visiter_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "book_id"
+    t.integer "post_comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_notifications_on_book_id"
+    t.index ["post_comment_id"], name: "index_notifications_on_post_comment_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index [nil], name: "index_notifications_on_visitor_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -43,6 +68,21 @@ ActiveRecord::Schema.define(version: 2020_01_25_085458) do
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
     t.index ["following_id"], name: "index_relationships_on_following_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_rooms", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

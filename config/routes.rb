@@ -15,5 +15,7 @@ devise_for :users
 
   resources :relationships,       only: [:create, :destroy]
 
+  resources :rooms
+
 
 end

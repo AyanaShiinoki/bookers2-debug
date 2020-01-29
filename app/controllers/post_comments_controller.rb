@@ -16,7 +16,7 @@ before_action :authenticate_user!
 		post_comment = PostComment.find_by(params[:id]) #コントローラ内なら(params[:id])
 		if post_comment.user == current_user
 		post_comment.destroy
-		redirect_to request.referer
+		# redirect_to request.referer
 		else
 		redirect_to request.referer
 		end

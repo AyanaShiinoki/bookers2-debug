@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
 	def create
 		@room = Room.create(:name=> "DM")
 		@userRoom1 = UserRoom.create(:room_id => @room.id, :user_id => current_user.id)
-		@userRoom2 = UserRoom.create(params.require(:userRoom).permit(:user_id, :room_id).merge(:room_id => @room.id))
+		@userRoom2 = UserRoom.create(params.require(:user_room).permit(:user_id, :room_id).merge(:room_id => @room.id))
 		redirect_to room_path(@room.id)
 	end
 end

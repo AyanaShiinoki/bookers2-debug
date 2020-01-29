@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
 		@room = Room.find(params[:id])
 		if UserRoom.where(:user_id => current_user.id, :room_id => @room.id).present?
 			@chats = @room.chats
-			@userRooms = @room.chats
+			@userRooms = @room.user_rooms
 		else
 			redirect_back(fallback_location: root_path)
 		end

@@ -6,11 +6,11 @@
 <% end %>
 
 <h1>Chat room</h1>
+<div id="chats" data-room_id="<%= @room.id %>">
+  <%= render partial: "chats/chats" , locals: { chats: @chats }  %>
+</div>
 <form>
   <label>Say something:</label><br>
   <input type="text" id="chat-input" data-behavior="room_speaker">
 </form>
 
-<div id="chats" data-room_id="<%= @room.id %>">
-  <%= render @chats %>
-</div>

@@ -9,6 +9,11 @@ has_many :favorites, dependent: :destroy
 has_many :post_comments, dependent: :destroy
 attachment :profile_image, destroy: false
 
+# チャット機能
+has_many :user_rooms
+has_many :chats
+has_many :rooms, through: :user_rooms
+
 # フォロー機能アソシエーション
 has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
 has_many :followings, through: :following_relationships

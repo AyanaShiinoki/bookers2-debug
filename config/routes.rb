@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get 'rooms/show'
+  get 'room/:id' => 'room#show', as: 'room'
 devise_for :users
   root 'home#top'
   get 'home/about'

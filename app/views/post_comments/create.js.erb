@@ -11,9 +11,3 @@ $('#comment_field').val('');
 $(".book_<%= @book.id %>").html("<%= j(render 'books/detail', book: @book ) %>");
 $('.comment_<%= @book.id %>').html("<%= j(render 'post_comments/post_comment', book: @book) %>");
 
-
-// $('#comment_form').html("<%= escape_javascript(render 'post_comments/post_comment_form',  book: @book,post_comment: @post_comment) %>");
-
-
-
-// $('#post_comment_comment').val("");

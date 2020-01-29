@@ -1,0 +1,12 @@
+<div class="message" style="width: 400px;">
+
+	<% chats.each do |e| %>
+		<% if e.user_id == current_user.id %>
+			<p style="text-align: left;"><%= e.message %></p>
+		<% else %>
+			<p style="text-align: right;"><%= e.message %></p>
+		<% end %>
+	<% end %>
+
+
+</div>
